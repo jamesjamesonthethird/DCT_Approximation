@@ -1,0 +1,23 @@
+function cellArr = mergeSortRecurisive(cellArr, firstElementIndex, lastElementIndex, threshold, typeFlag)
+% Sort arr(firstElement : lastElement) via merge sort
+% Note: In practice, arr should be passed by refrence
+% Compute center index
+middleElement = floor((firstElementIndex + lastElementIndex) / 2);
+% Divide...
+if((middleElement + 1 - firstElementIndex) <= threshold)
+     cellArr = insertionSort(cellArr, firstElementIndex, middleElement, typeFlag);
+else
+    % Sort arr(firstElement : middleElement) via insertion sort 
+    cellArr = mergeSortRecurisive(cellArr, firstElementIndex, middleElement, threshold, typeFlag);
+end
+
+if((lastElementIndex - middleElement) <= threshold)
+    % Sort arr((middleElement +  1): lastElement) via insertion sort
+    cellArr = insertionSort(cellArr, middleElement + 1, lastElementIndex, typeFlag);
+else
+    % Sort arr((middleElement + 1): lastElement) via merge sort 
+    cellArr = mergeSortRecurisive(cellArr, middleElement + 1, lastElementIndex, threshold, typeFlag);
+end
+%Conquer!!
+cellArr = merge(cellArr, firstElementIndex, middleElement, lastElementIndex, typeFlag);
+end 

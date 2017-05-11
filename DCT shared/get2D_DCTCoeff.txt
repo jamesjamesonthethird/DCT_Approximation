@@ -1,0 +1,18 @@
+function [C] = get2D_DCTCoeff(I)
+% calculates the two dimensional DCT coefficients
+[n,m] =size(I);
+I = im2double(I);
+A = get1D_DCTBasis(n);
+x = zeros(m);
+C = zeros(m);
+for o = 1:m
+    for p = 1:m
+        for j = 1:m
+             for z = 1:m
+                x(j,z) = A(o,j).*A(p,z);
+             end
+        end    
+        C(o,p) = get2D_InnerProduct(I, x);             
+    end
+end
+

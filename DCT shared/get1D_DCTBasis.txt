@@ -1,0 +1,14 @@
+function [B] = get1D_DCTBasis(N)
+%finds the 1D transform basis vectors 
+B = zeros(N);
+for j = 1:N
+    if j == 1
+        B(j, :) = sqrt(1./N);
+    else
+        func = @(x) sqrt(2./N).*cos(pi.*(j-1).*((x-.5)./N));       
+        for z = 1:N
+            B(j, z) = func(z);
+        end
+    end
+end
+end

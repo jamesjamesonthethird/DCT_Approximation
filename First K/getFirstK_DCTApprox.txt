@@ -1,0 +1,34 @@
+function [Iapprox] = getFirstK_DCTApprox(I, k)
+% Masks the first coefficients of the 2D DCT
+% and return the corresponding approximation of I
+[n,m] = size(I);
+counter = 0;
+numberOfElements = ceil((m*m)*k);  
+n = ceil(sqrt((m*m)*k)); % largest row index possible
+mask = zeros(m);
+C = get2D_DCTCoeff(I);
+
+for i = 1:n
+    for j = 1:i
+        
+        if counter >= numberOfElements
+            break
+        end
+     
+        if j == i 
+            counter = counter + 1;
+            mask(i,j) = 1;
+        else
+            mask(i,j) = 1;
+            counter = counter + 1;
+            if counter >= numberOfElements
+                break
+            end
+                mask(j, i) = 1;
+                counter = counter + 1;
+        end
+    end
+end
+C = mask.*C;
+Iapprox = getImage(C);
+end

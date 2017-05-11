@@ -1,0 +1,6 @@
+function [II] = getImage(C)
+[n,m] =size(C);
+A = get1D_DCTBasis(n);
+II = A' * C *A;
+II =  im2uint8(II);
+end

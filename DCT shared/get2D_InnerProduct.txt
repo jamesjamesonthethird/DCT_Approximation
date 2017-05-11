@@ -1,0 +1,4 @@
+function [ x ] = get2D_InnerProduct( A1, A2 )
+% takes the innerProduct of two matrix vectors
+x = sum(sum(A1.*A2));
+end

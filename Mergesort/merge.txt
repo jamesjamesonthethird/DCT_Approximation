@@ -1,0 +1,49 @@
+function cellArr = merge(cellArr, leftElementIndex, middleElementIndex, lastElementIndex, typeFlag)
+% Combine sorted arrays arr(leftElement : middleElement) and arr((middleElement + 1): lastElement)
+% Note: In practice, arr should be passed by refrence 
+% Note: In practice, us memcpy() or similar
+
+
+leftCells = cellArr(leftElementIndex : middleElementIndex);
+% Combine sorted arrays 
+i = 1;
+j = middleElementIndex + 1;
+k = leftElementIndex;
+switch typeFlag
+    case 1
+        while ((k < j) && (j <= lastElementIndex))
+            rightCell = cellArr{1,j};
+            leftCell = leftCells{1,i};
+            rightElement = rightCell(1,1);
+            leftElement = leftCell(1,1);
+            if(leftElement <= rightElement)
+                cellArr{1,k} = cellArr{1,j};
+                j = j + 1;
+            else
+                cellArr{1,k} = leftCells{1,i};
+                i = i + 1;
+            end
+            k = k + 1;
+        end
+    case -1 
+        while ((k < j) && (j <= lastElementIndex))
+            rightCell = cellArr{1,j};
+            leftCell = leftCells{1,i};
+            
+            rightElement = rightCell(1,1);
+            leftElement = leftCell(1,1);
+            if(leftElement <= rightElement)
+                cellArr{1,k} = leftCells{1,i};
+                i = i + 1;
+            else
+                cellArr{1,k} = cellArr{1,j};
+                j = j + 1;
+            end
+            k = k + 1;
+        end
+    otherwise
+        display('Error');   
+end
+% Note: In practice, use memcpy() or similar
+cellArr(k:(j - 1)) = leftCells(i:(i + j - k - 1));
+end

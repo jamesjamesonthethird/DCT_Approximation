@@ -1,0 +1,41 @@
+function cellArr = insertionSort(cellArr, leftElementIndex, lastElementIndex, typeFlag)
+% Sort arr(leftElement : lastElement ) via insertion sort
+% Note: In practice, arr should be passes by refrence
+
+switch(typeFlag)
+    case 1
+        for j = (leftElementIndex + 1): lastElementIndex
+            i = j;
+            pivotCell = cellArr{1,j};
+            pivotElement = pivotCell(1,1);
+            
+            previousCell = cellArr{1,i-1};
+            previousElement = previousCell(1, 1);
+            
+            while((i > leftElementIndex) && (previousElement < pivotElement))
+                cellArr{1,i} = cellArr{1,i -1};
+                i = i -  1;
+                previousCell = cellArr{1,i-1};
+                previousElement = previousCell(1, 1);
+            end
+            cellArr{1,i} = pivotCell;
+        end 
+    case -1
+          for j = (leftElementIndex + 1): lastElementIndex
+            i = j;
+            pivotCell = cellArr{1,j};
+            pivotElement = pivotCell(1,1);
+            
+            previousCell = cellArr{1,i-1};
+            previousElement = previousCell(1, 1);
+            
+            while((i > leftElementIndex) && (previousElement > pivotElement))
+                cellArr{1,i} = cellArr{1,i -1};
+                i = i -  1;
+                previousCell = cellArr{1,i-1};
+                previousElement = previousCell(1, 1);
+            end
+            cellArr{1,i} = pivotCell;
+          end
+end
+end

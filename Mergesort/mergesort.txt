@@ -1,0 +1,7 @@
+function cellArr = mergesort(cellArr, typeFlag)
+% receives cell
+threshold = 8; %Insertion sort threshold >= 1
+%Mergesort
+n = length(cellArr);
+cellArr = mergeSortRecurisive(cellArr, 1, n, threshold, typeFlag);
+end 
